@@ -1,0 +1,22 @@
+{%- block scripts %}
+<script src="{{ url_for( 'index.static' , filename='navigation.js')  }}" defer></script>
+{% endblock scripts -%} {% extends "head.html" %} {%- block style %}
+<link rel="stylesheet" href="{{ url_for( 'index.static' , filename='navigation.css')}}"> {% endblock style -%}
+
+<!-- {# main #} -->
+{% block main -%}
+<div id="grid-container">
+    <section id="navigation-menu">
+        <div class="nav-child" id="account"></div>
+        <div class="nav-child" id="buy-reviewer"></div>
+    </section>
+
+    <section id="top-section">
+
+    </section>
+
+    <main id="subjects-container">
+        {% block subjects -%} {%- endblock subjects %}
+    </main>
+</div>
+{%- endblock main %}

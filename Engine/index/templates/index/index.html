@@ -1,0 +1,22 @@
+{% extends 'navigation.html' %}
+
+<!-- {# styles #} -->
+{% block component_style -%}
+<link rel="stylesheet" href="{{ url_for('index.static', filename='subjects.css') }}"> {% endblock component_style %}
+
+<!-- {# scripts #} -->
+{% block component_script -%}
+<script src="{{ url_for('index.static', filename='subjects.js')}}" defer></script>
+{%- endblock component_script %}
+
+<!-- {# subject section #} -->
+{% block subjects -%}
+<main class="subjects">
+    {% for subject in subjects -%}
+    <div class="subject">
+        <div class="subject-title">{{ subject.name }}</div>
+        <p class="score"><span>0</span>/{{subject.score}}</p>
+    </div>
+    {%- endfor %}
+</main>
+{%- endblock subjects %}

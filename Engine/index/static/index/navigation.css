@@ -1,0 +1,23 @@
+@import "/static/root.css";
+#grid-container {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 14% 86%;
+    grid-template-rows: 10% 90%;
+    grid-template-areas: "top-bar top-bar" "navigation-rail main-content" "navigation-rail main-content";
+}
+
+#navigation-menu {
+    grid-area: navigation-rail;
+    background-color: var(--lighterBackgroundColor)
+}
+
+#top-section {
+    grid-area: top-bar;
+    background-color: var(--lighterBackgroundColor)
+}
+
+#subject-container {
+    grid-area: main-content
+}
