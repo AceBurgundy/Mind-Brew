@@ -7,7 +7,9 @@
     --sectionShadow: rgba(0, 0, 0, 0.06) 0px 5px 18px;
     --background: #1b1c31;
     --lighterBackgroundColor: #22223a;
+    --iconBackgroundColor: #27283d;
     --cardBackgroundColor: #32324a;
+    --defaultIconFill: #3248df;
 }
 
 * {
@@ -27,6 +29,7 @@ body {
 
 .icon {
     width: 1rem;
+    fill: var(--defaultIconFill);
 }
 
 .button {
