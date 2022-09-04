@@ -45,11 +45,13 @@ class Subject(db.Model, UserMixin):
     image = db.Column(
         db.String(100), nullable=False, default='subject.jpg')
     score = db.Column(db.Integer, nullable=False, default=0)
+    bought_test = db.Column(db.Boolean, nullable=False, default=False)
+    # code = db.Column(db.String(40), nullable=False)
 
     questions = db.relationship('Reviewer', backref='subject', lazy=True)
 
     def __repr__(self):
-        return f"Subject('{self.name}','{self.professor}') "
+        return f"Subject('{self.name}','{self.professor}','{self.bought_test}') "
 
 
 class Reviewer(db.Model, UserMixin):
