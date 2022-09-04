@@ -16,6 +16,11 @@
     <div class="subject">
         <div class="subject-title">{{ subject.name }}</div>
         <p class="score"><span>0</span>/{{subject.score}}</p>
+            <div class="subject-options">
+                {% if subject.bought_test == True -%}
+                <a href="{{url_for('index.take_test', subject=subject.id)}}" class="subject-button">Take Test</a> {%- else -%}
+                <a href="{{url_for('index.buy_test', subject=subject.id)}}" class="subject-button">Buy Test</a>
+            </div>
     </div>
     {%- endfor %}
 </main>

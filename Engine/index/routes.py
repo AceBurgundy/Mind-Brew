@@ -19,3 +19,19 @@ def _index():
     if request.method == "GET":
         subjects = Subject.query.all()
         return render_template("index.html", subjects=subjects, image_file=image_file, pageTitle=pageTitle)
+
+
+@index.post("/buy_test/<int:current_subject_id>")
+def buy_test(current_subject_id):
+    # buying logic
+
+    # logic for changing value of it to bought
+    """
+    if (buying logic is true):
+        subject = db.session.get(Subject, current_subject_id)
+        subject.bought_test = True
+        db.session.commit()
+        return jsonify(success='Success')
+    else:
+        return jsonify(success='Cannot buy reviewer')
+    """
