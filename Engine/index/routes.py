@@ -35,3 +35,15 @@ def buy_test(current_subject_id):
     else:
         return jsonify(success='Cannot buy reviewer')
     """
+
+
+@index.post("/take_test/<int:current_subject_id>")
+def take_test(current_subject_id):
+
+    """
+    subject = db.session.get(Subject, current_subject_id)
+    if (subject.bought_test == True):
+        return redirect url_for('review.test', current_subject_id=current_subject_id)
+    else:
+        return jsonify(message='Haven't bought the test yet')
+    """
