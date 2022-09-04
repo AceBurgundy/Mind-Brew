@@ -41,6 +41,15 @@ body {
     box-shadow: var(--defaultShadow);
 }
 
+.icon-button {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--iconBackgroundColor);
+    width: 2rem;
+}
+
 * {
     font-size: 15px;
     outline: 0px !important;
