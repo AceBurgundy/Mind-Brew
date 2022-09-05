@@ -69,6 +69,16 @@ class Reviewer(db.Model, UserMixin):
         return f"Reviewer('{self.question}')"
 
 
+class BufferAnswers(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.String(100), nullable=False)
+    reviwer_id = db.Column(db.Integer, db.ForeignKey(
+        'reviewer.id'), nullable=False)
+
+    def __repr__(self):
+        return f"BufferAnswers('{self.answer}')"
+
+
 class myModelView(ModelView):
     def is_accessible(self):
         return False
