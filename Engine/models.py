@@ -77,8 +77,3 @@ class BufferAnswers(db.Model, UserMixin):
 
     def __repr__(self):
         return f"BufferAnswers('{self.answer}')"
-
-
-class myModelView(ModelView):
-    def is_accessible(self):
-        return False
