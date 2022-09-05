@@ -56,12 +56,12 @@ class Subject(db.Model, UserMixin):
 
 class Reviewer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Text()
-    choice_1 = db.Column(db.String(100))
-    choice_2 = db.Column(db.String(100))
-    choice_3 = db.Column(db.String(100))
-    choice_4 = db.Column(db.String(100))
-    correct_answer = db.Column(db.String(100))
+    question = db.Text(nullable=False)
+    choice_1 = db.Column(db.String(100), nullable=False)
+    choice_2 = db.Column(db.String(100), nullable=False)
+    choice_3 = db.Column(db.String(100), nullable=False)
+    choice_4 = db.Column(db.String(100), nullable=False)
+    correct_answer = db.Column(db.String(100), nullable=False)
     subject_id = db.Column(db.Integer, db.ForeignKey(
         'subject.id'), nullable=False)
 
