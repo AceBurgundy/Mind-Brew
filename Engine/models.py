@@ -48,6 +48,7 @@ class Subject(db.Model, UserMixin):
     code = db.Column(db.String(40), nullable=False)
     available_test = db.Column(db.Boolean, nullable=False, default=True)
 
+    students = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     questions = db.relationship('Reviewer', backref='subject', lazy=True)
 
     def __repr__(self):
