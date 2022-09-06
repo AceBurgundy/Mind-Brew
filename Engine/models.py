@@ -46,6 +46,7 @@ class Subject(db.Model, UserMixin):
         db.String(100), nullable=False, default='subject.jpg')
     score = db.Column(db.Integer, nullable=False, default=0)
     code = db.Column(db.String(40), nullable=False)
+    available_test = db.Column(db.Boolean, nullable=False, default=True)
 
     questions = db.relationship('Reviewer', backref='subject', lazy=True)
 
