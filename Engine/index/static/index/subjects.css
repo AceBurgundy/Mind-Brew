@@ -1,4 +1,79 @@
 @import "/static/root.css";
-.subjects {
-    background-color: white;
+@import "/static/fonts.css";
+#subjects {
+    margin: 5em;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+}
+
+#message-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#subject-list {
+    display: flex;
+    gap: 1.5em;
+    height: fit-content;
+}
+
+.subject {
+    background-color: var(--cardBackgroundColor);
+    width: 175px;
+    height: 210px;
+    border-radius: 25px;
+    padding: 1.5em;
+    padding-top: 3em;
+    padding-bottom: 1em;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#options {
+    background-color: var(--iconBackgroundColor);
+}
+
+#menu-horizontal {
+    fill: var(--defaultIconFill);
+}
+
+.subject-options {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.score,
+.subject-score {
+    font-size: 0.8rem;
+}
+
+.subject-button {
+    background-color: var(--buttonColor)
+}
+
+.shopping-cart-line,
+#shopping-cart-line-filled {
+    width: 1.3rem;
+    fill: var(--cardButtonTextColor);
+    transition: 500ms ease;
+}
+
+.buy-button {
+    border-radius: 50px;
+    padding: 0.7em;
+}
+
+#shopping-cart-line-filled {
+    display: none;
+}
+
+.subject-title {
+    font-family: "Poppins Medium";
 }
