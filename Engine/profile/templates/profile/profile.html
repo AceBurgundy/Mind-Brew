@@ -1,0 +1,140 @@
+{% extends 'navigation.html' %}
+
+<!-- {# styles #} -->
+{%- block component_style %}
+<link rel="stylesheet" href="{{ url_for( 'profile.static' , filename='profile.css')  }}"> {% endblock component_style -%}
+
+<!-- {# scripts #} -->
+{%- block component_script %}
+<script src="{{ url_for( 'profile.static' , filename='profile.js')  }}" type="module"></script>
+{% endblock component_script -%}
+
+<!-- {# profile section #} -->
+{%- block profile -%}
+
+
+<div id="profile-section">
+
+    <div id="profile-image-container">
+        <img src="{{ image_file }}" alt="" id="profile-image">
+    </div>
+
+    <div id="profile-main">
+
+        <!-- Top Section -->
+        <div class="profile-top">
+
+            <!-- Profile Picture Container -->
+            <div id="profile-username-container">
+                <div class="profile-picture-container">
+                    <div class="profile-picture-big">
+                        <!-- Profile picture src -->
+                        <img src="{{ image_file }}" id="actual_picture" alt="">
+                    </div>
+                </div>
+                <div id="username-container">
+                    <!-- Username input -->
+                    <p id="username">{{ user.username }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="profile-body">
+            <!-- Name, Last Name, Address Container  -->
+            <div class="name-fields-container">
+
+                <div class="profile-data">
+                    <p class="first-name" id="first-name">
+                        {% if user.first_name == None -%}
+                        <!--  -->
+                        Add first name
+                        <!--  -->
+                        {%- else -%}
+                        <!--  -->
+                        {{user.first_name}}
+                        <!--  -->
+                        {%- endif %}
+                    </p>
+                </div>
+
+                <div class="profile-data" id="last_name">
+                    <!-- last name input -->
+                    <p class="last-name" id="last-name">
+                        {% if user.last_name == None -%}
+                        <!--  -->
+                        Add last name
+                        <!--  -->
+                        {%- else -%}
+                        <!--  -->
+                        {{user.last_name}}
+                        <!--  -->
+                        {%- endif %}
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Address -->
+            <div class="profile-data">
+                <label for="school" class="school-label">School</label>
+                <!-- school input -->
+                <p class="user-info" id="school">
+                    {% if user.school == None -%}
+                    <!--  -->
+                    Add your school
+                    <!--  -->
+                    {%- else -%}
+                    <!--  -->
+                    {{user.school}}
+                    <!--  -->
+                    {%- endif %}
+                </p>
+            </div>
+
+            <!-- Skills -->
+            <div class="profile-data">
+                <label for="course" class="course-label">Course</label>
+                <!-- course input -->
+                <p class="user-info" id="course">
+                    {% if user.course == None -%}
+                    <!--  -->
+                    Add your course
+                    <!--  -->
+                    {%- else -%}
+                    <!--  -->
+                    {{user.course}}
+                    <!--  -->
+                    {%- endif %}
+                </p>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="profile-data">
+                <label for="phone" class="number-country-label">Phone Number</label>
+                <!-- contact number input -->
+                <p class="user-info">
+                    <p class="user-info" id="phone">
+                        {% if user.phone == None -%}
+                        <!--  -->
+                        Add your phone number
+                        <!--  -->
+                        {%- else -%}
+                        <!--  -->
+                        {{user.phone}}
+                        <!--  -->
+                        {%- endif %}
+                    </p>
+                </p>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="profile-options">
+            <a href="{{ url_for('profile.edit_profile') }}" class="button">Edit</a>
+            <a class="button" id="return-to-previous">Return</a>
+        </div>
+
+        </form>
+    </div>
+    {%- endblock profile %}
