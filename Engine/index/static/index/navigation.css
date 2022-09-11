@@ -15,9 +15,81 @@
 
 #top-section {
     grid-area: top-bar;
+    position: relative;
+    z-index: 2;
     background-color: var(--lighterBackgroundColor)
 }
 
+#profile {
+    display: flex;
+    justify-content: space-evenly;
+    width: 6rem;
+    position: absolute;
+    right: 0%;
+    top: 25%;
+    transform: translateX(-25%);
+}
+
+.dashboard-profile-picture {
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    clip-path: circle();
+}
+
+#profile-arrow-icon {
+    width: 1.1rem;
+    background-color: inherit;
+    cursor: pointer;
+    transition: 150ms ease-in-out;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 1%;
+    top: 125%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.profile-dropdown-button {
+    background-color: inherit;
+    border: none;
+}
+
+.profile-dropdown-button.active+.profile-dropdown {
+    opacity: 1;
+    transform: translateY(5%);
+    pointer-events: auto;
+}
+
+.profile-dropdown-button .active>.profile-arrow-icon {
+    transform: rotate(180deg);
+}
+
+.profile-dropdown-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 4rem;
+    width: 9rem;
+    transition: 500ms ease;
+    background-color: var(--cardBackgroundColor);
+    font-size: 1rem;
+}
+
+.profile-dropdown-link:hover {
+    font-size: 0.9rem;
+}
+
 #subject-container {
-    grid-area: main-content
+    grid-area: main-content;
+    position: relative;
+    z-index: 1;
 }
