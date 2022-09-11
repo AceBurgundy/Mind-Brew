@@ -1,8 +1,9 @@
-from flask import Blueprint
-
-from flask import render_template, request, url_for
+from flask import Blueprint, render_template, request, url_for, jsonify, redirect
 from flask_login import current_user, login_required
 from Engine.models import Subject
+from Engine import mail, db
+from flask_mail import Message
+import os
 
 index = Blueprint('index', __name__, template_folder='templates/index',
                   static_folder='static/index', )
@@ -21,29 +22,15 @@ def _index():
         return render_template("index.html", subjects=subjects, image_file=image_file, pageTitle=pageTitle)
 
 
-@index.post("/buy_test/<int:current_subject_id>")
+@index.get("/buy/<int:current_subject_id>")
 def buy_test(current_subject_id):
     # buying logic
-
-    # logic for changing value of it to bought
-    """
-    if (buying logic is true):
-        subject = db.session.get(Subject, current_subject_id)
-        subject.bought_test = True
-        db.session.commit()
-        return jsonify(success='Success')
-    else:
-        return jsonify(success='Cannot buy reviewer')
-    """
-
-
-@index.post("/take_test/<int:current_subject_id>")
-def take_test(current_subject_id):
-
-    """
+    compose = Message(current_user.username + " wants to buy a Reviewer",
+                      sender=(current_user.email),
+                      recipients=[os.getenv('EMAIL')]
+                      )
     subject = db.session.get(Subject, current_subject_id)
-    if (subject.bought_test == True):
-        return redirect url_for('review.test', current_subject_id=current_subject_id)
-    else:
-        return jsonify(message='Haven't bought the test yet')
-    """
+    compose.body = "{name} wants to buy a reviewer for {subject_name}".format(
+        name=current_user.first_name if current_user.first_name is not None else current_user.username, subject_name=subject.name)
+    mail.send(compose)
+    return jsonify(message="Query sent! Please contact me for a faster transaction")
