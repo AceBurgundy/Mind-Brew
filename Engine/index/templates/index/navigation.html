@@ -12,11 +12,20 @@
     </section>
 
     <section id="top-section">
-
+        <div id="profile">
+            <a href="{{ url_for('profile._profile') }}" id="profile-picture-main">
+                <img src="{{ image_file }}" class="dashboard-profile-picture" alt="">
+            </a>
+            <button class="profile-dropdown-button"><svg id="profile-arrow-icon" class="profile-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><polyline fill="none" stroke="#3248df" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" points="208 96 128 176 48 96"/></svg></button>
+            <div id="profile-dropdown" class="profile-dropdown">
+                <a href="{{ url_for('app-user.logout') }}" class="profile-dropdown-link">LOGOUT</a>
+            </div>
+        </div>
     </section>
 
     <main id="subjects-container">
         {% block subjects -%} {%- endblock subjects %}
+        <!--  -->{% block profile -%}{%- endblock profile %}
     </main>
 </div>
 {%- endblock main %}
