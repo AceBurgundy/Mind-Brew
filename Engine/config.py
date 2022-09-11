@@ -18,9 +18,9 @@ class Config:
 
     # Email
 
-    MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 465
-    MAIL_USERNAME = os.getenv("EMAIL")
-    MAIL_PASSWORD = os.getenv("PASSWORD")
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
+    MAIL_SERVER = os.getenv("MAIL_SERVER")
+    MAIL_PORT = 2525
+    MAIL_USERNAME = os.getenv("MAIL_USER")
+    MAIL_PASSWORD = os.getenv("MAIL_PASS")
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
