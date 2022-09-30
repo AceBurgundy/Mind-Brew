@@ -36,13 +36,10 @@ def edit_profile():
                 current_user.profile_picture = save_picture(
                     form.profilePicture.data)
 
-            current_user.username = form.username.data
             current_user.first_name = form.first_name.data
             current_user.last_name = form.last_name.data
-            current_user.skills = form.skills.data
-            current_user.address = form.address.data
-            current_user.banner = form.banner.data
-            current_user.country = form.country.data
+            current_user.school = form.school.data
+            current_user.course = form.course.data
             current_user.phone = form.phone.data
             flash('Successfully updated profile')
             db.session.commit()
@@ -53,13 +50,10 @@ def edit_profile():
         image_file = url_for(
             'static', filename='profile_pictures/' + current_user.profile_picture)
 
-        form.username.data = current_user.username
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
-        form.skills.data = current_user.skills
-        form.address.data = current_user.address
-        form.banner.data = current_user.banner
-        form.country.data = current_user.country
+        form.school.data = current_user.school
+        form.course.data = current_user.course
         form.phone.data = current_user.phone
 
         return render_template("edit-profile.html", form=form, image_file=image_file, passForm=passForm)

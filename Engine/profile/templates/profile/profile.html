@@ -15,10 +15,6 @@
 
 <div id="profile-section">
 
-    <div id="profile-image-container">
-        <img src="{{ image_file }}" alt="" id="profile-image">
-    </div>
-
     <div id="profile-main">
 
         <!-- Top Section -->
@@ -45,96 +41,99 @@
             <div class="name-fields-container">
 
                 <div class="profile-data">
-                    <p class="first-name" id="first-name">
-                        {% if user.first_name == None -%}
+                    <label class="school-label">Name</label>
+                    <div id="name">
+                        <p class="user-info" id="first-name">
+                            {% if user.first_name == None -%}
+                            <!--  -->
+                            Add first name
+                            <!--  -->
+                            {%- else -%}
+                            <!--  -->
+                            {{user.first_name}}
+                            <!--  -->
+                            {%- endif %}
+                        </p>
+                        <p class="user-info" id="last-name">
+                            {% if user.last_name == None -%}
+                            <!--  -->
+                            Add last name
+                            <!--  -->
+                            {%- else -%}
+                            <!--  -->
+                            {{user.last_name}}
+                            <!--  -->
+                            {%- endif %}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="profile-data">
+                    <label for="school" class="school-label">School</label>
+                    <!-- school input -->
+                    <p class="user-info" id="school">
+                        {% if user.school == None -%}
                         <!--  -->
-                        Add first name
+                        Add your school
                         <!--  -->
                         {%- else -%}
                         <!--  -->
-                        {{user.first_name}}
+                        {{user.school}}
                         <!--  -->
                         {%- endif %}
                     </p>
                 </div>
 
-                <div class="profile-data" id="last_name">
-                    <!-- last name input -->
-                    <p class="last-name" id="last-name">
-                        {% if user.last_name == None -%}
+                <!-- Skills -->
+                <div class="profile-data">
+                    <label for="course" class="course-label">Course</label>
+                    <!-- course input -->
+                    <p class="user-info" id="course">
+                        {% if user.course == None -%}
                         <!--  -->
-                        Add last name
+                        Add your course
                         <!--  -->
                         {%- else -%}
                         <!--  -->
-                        {{user.last_name}}
+                        {{user.course}}
                         <!--  -->
                         {%- endif %}
                     </p>
                 </div>
 
-            </div>
-
-            <!-- Address -->
-            <div class="profile-data">
-                <label for="school" class="school-label">School</label>
-                <!-- school input -->
-                <p class="user-info" id="school">
-                    {% if user.school == None -%}
-                    <!--  -->
-                    Add your school
-                    <!--  -->
-                    {%- else -%}
-                    <!--  -->
-                    {{user.school}}
-                    <!--  -->
-                    {%- endif %}
-                </p>
-            </div>
-
-            <!-- Skills -->
-            <div class="profile-data">
-                <label for="course" class="course-label">Course</label>
-                <!-- course input -->
-                <p class="user-info" id="course">
-                    {% if user.course == None -%}
-                    <!--  -->
-                    Add your course
-                    <!--  -->
-                    {%- else -%}
-                    <!--  -->
-                    {{user.course}}
-                    <!--  -->
-                    {%- endif %}
-                </p>
-            </div>
-
-            <!-- Contact Number -->
-            <div class="profile-data">
-                <label for="phone" class="number-country-label">Phone Number</label>
-                <!-- contact number input -->
-                <p class="user-info">
-                    <p class="user-info" id="phone">
-                        {% if user.phone == None -%}
-                        <!--  -->
-                        Add your phone number
-                        <!--  -->
-                        {%- else -%}
-                        <!--  -->
-                        {{user.phone}}
-                        <!--  -->
-                        {%- endif %}
+                <!-- Contact Number -->
+                <div class="profile-data">
+                    <label for="phone" class="number-country-label">Phone Number</label>
+                    <!-- contact number input -->
+                    <p class="user-info">
+                        <p class="user-info" id="phone">
+                            {% if user.phone == None -%}
+                            <!--  -->
+                            Add your phone number
+                            <!--  -->
+                            {%- else -%}
+                            <!--  -->
+                            {{user.phone}}
+                            <!--  -->
+                            {%- endif %}
+                        </p>
                     </p>
-                </p>
+                </div>
             </div>
-        </div>
 
-        <!-- Bottom Section -->
-        <div class="profile-options">
-            <a href="{{ url_for('profile.edit_profile') }}" class="button">Edit</a>
-            <a class="button" id="return-to-previous">Return</a>
-        </div>
+            <!-- Bottom Section -->
+            <div class="profile-options">
+                {% if current_user %}
+                <a href="{{ url_for('profile.edit_profile') }}" class="button">Edit</a>
+                <!--  -->
+                {% endif %}
+                <a class="button" id="return-to-previous">Return</a>
+                <div id="message" class="button">
+                    Message
+                </div>
+            </div>
 
-        </form>
-    </div>
-    {%- endblock profile %}
+            </form>
+        </div>
+        {%- endblock profile %}

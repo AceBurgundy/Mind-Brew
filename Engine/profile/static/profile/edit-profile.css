@@ -1,17 +1,16 @@
-@import "/static/root.css";
+@import url("changePassword.css");
 
 /*--------------------+
 |  Parent Container   | 
 +---------------------*/
 
 #profile-section {
-    margin: 5em;
-    margin-top: 2em;
-    margin-bottom: 0%;
+    margin: 2em;
     width: 50%;
     justify-content: center;
     display: flex;
-    opacity: 0;
+    opacity: 1;
+    padding: 1em;
     transition: 500ms ease;
 }
 
@@ -40,13 +39,6 @@
     flex-direction: column;
 }
 
-#motto-counter {
-    position: absolute;
-    margin: 0.5rem;
-    bottom: 0%;
-    right: 0%;
-}
-
 
 /*-----------------------+ 
 |  Top Section Controls  | 
@@ -55,26 +47,13 @@
 .profile-top-controls {
     position: relative;
     display: flex;
-    margin-top: 1em;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.profile-x-button {
-    position: relative;
-    padding: 0px;
-    background-color: #fcfcfc;
-    border: none;
-    height: max-content;
-    font-size: 1.5rem;
-    font-weight: 300;
-    cursor: pointer;
+    justify-content: flex-end;
 }
 
 #save-button {
     border: none;
     cursor: pointer;
-    background-color: #F6CFCA;
+    background-color: var(--buttonColor);
     padding: 0.7em 1.1em;
     border-radius: 12px;
     font-size: 0.9rem;
@@ -151,7 +130,7 @@
     opacity: 1;
 }
 
-.camera-icon {
+.icons {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -198,10 +177,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.7em 0.4em 0.4em;
+    padding: 0.7em 0.4em 0em;
     background-color: var(--cardBackgroundColor);
-    height: 6rem;
+    height: 5rem;
     border-radius: 5px;
+}
+
+.profile-input-field:last-of-type {
+    padding-left: 1rem;
+    align-items: flex-start;
+    width: 50%;
 }
 
 .profile-input-field:nth-child(1),
@@ -224,13 +209,14 @@
     font-size: 0.8rem;
 }
 
-.input-field-placeholders {
-    width: 95%;
-}
-
+.input-field-placeholders,
 .input-field-school,
 .input-field-details {
-    width: 97.5%
+    width: 97.5%;
+}
+
+.phone-label {
+    margin-bottom: 0.9rem;
 }
 
 
@@ -246,49 +232,6 @@
 
 
 /*------------------+ 
-|  Contact Number   | 
-+-------------------*/
-
-.number-country {
-    font-size: 0.8rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.number-country-label {
-    opacity: 0.8;
-    margin-bottom: 0.5rem;
-}
-
-.contact-number {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    height: 2.5rem;
-    border-radius: 5px;
-    background-color: var(--cardBackgroundColor);
-    padding: 0 0.5em;
-}
-
-.contact-grid input {
-    border: none;
-    font-family: 'Poppins', sans-serif;
-}
-
-.number-country-child {
-    width: 15rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.number-country-child:last-of-type {
-    position: relative;
-}
-
-
-/*------------------+ 
 |  Bottom Section   | 
 +-------------------*/
 
@@ -296,20 +239,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1em;
 }
 
 .change-password {
     cursor: pointer;
     padding: 1em 1.5em;
-    background-color: #896eff;
+    background-color: var(--buttonColor);
     border: none;
     border-radius: 15px;
     font-size: 0.8rem;
 }
 
 .profile-close-button {
-    background-color: #F6CFCA;
+    background-color: var(--buttonColor);
     font-size: 0.8rem;
     font-weight: 500;
     padding: 0.9em 1.2em;

@@ -11,18 +11,8 @@ from wtforms.validators import DataRequired, Length, ValidationError
 class profileForm(FlaskForm):
     submit = SubmitField('UPDATE', id="save-button")
 
-    banner = TextAreaField(u"Write here what you're open to collaborate with", id="motto", validators=[
-                           DataRequired(), Length(min=20, max=200), CheckProfanity()])
-
     profilePicture = FileField('Update Profile Picture', validators=[
                                FileAllowed(['jpeg', 'png', 'jpg', 'webp'])])
-
-    username = StringField(id='username', validators=[
-                           DataRequired(), Length(max=50), CheckProfanity()])
-
-    def validate_username(self, username):
-        if User.query.filter_by(username=username.data) == True:
-            raise ValidationError("Username already taken")
 
     first_name = StringField('First Name', id="first-name", validators=[DataRequired(
         message="Please add your username"), Length(max=50), CheckProfanity()])
@@ -30,13 +20,10 @@ class profileForm(FlaskForm):
     last_name = StringField('Last Name', id="last-name", validators=[DataRequired(
         message="Please add your last name"), Length(max=50), CheckProfanity()])
 
-    address = StringField(u'Address', id="address", validators=[
-                          Length(max=300), CheckProfanity()])
+    school = StringField(u'School', id="school", validators=[
+        Length(max=300), CheckProfanity()])
 
-    country = HiddenField(
-        id="country-input", validators=[DataRequired("Please add your country"), CheckProfanity()])
-
-    skills = StringField('Skills', id="skills", validators=[Length(
+    course = StringField('Course', id="course", validators=[Length(
         max=200, message="150 character limit"), CheckProfanity()])
 
     phone = TelField(

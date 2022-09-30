@@ -17,14 +17,14 @@ profileCancelButton.addEventListener('click', () => {
     if (profileSection.classList.contains("active")) {
         profileSection.classList.remove("active")
         setTimeout(() => {
-            window.history.back();
+            window.location = '/';
         }, 300);
     } else {
         profileSection.style.transition = "500ms"
         profileSection.style.transform = "translate(-50%, -40%)"
         profileSection.style.opacity = "0"
         setTimeout(() => {
-            window.history.back();
+            window.location = '/';
         }, 300);
     }
 })
