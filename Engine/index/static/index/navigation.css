@@ -40,7 +40,6 @@
 
 #message-icon {
     width: 1.7rem;
-    transition: 500ms;
     animation-name: swing;
     cursor: pointer;
 }
@@ -68,12 +67,32 @@
     position: relative;
 }
 
-#messages {
+.messages {
     position: absolute;
-    max-width: 30rem;
+    width: 25rem;
     height: fit-content;
     top: 240%;
     right: 0%;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+    background-color: var(--cardBackgroundColor);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.messages.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.notif {
+    cursor: pointer;
+    background-color: var(--lighterBackgroundColor);
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 #subject-container {
