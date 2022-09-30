@@ -1,4 +1,3 @@
-@import "/static/root.css";
 #grid-container {
     display: grid;
     height: 100vh;
@@ -23,7 +22,9 @@
 #profile {
     display: flex;
     justify-content: space-evenly;
-    width: 6rem;
+    align-items: center;
+    width: fit-content;
+    gap: 2rem;
     position: absolute;
     right: 0%;
     top: 25%;
@@ -37,55 +38,42 @@
     clip-path: circle();
 }
 
-#profile-arrow-icon {
-    width: 1.1rem;
-    background-color: inherit;
+#message-icon {
+    width: 1.7rem;
+    transition: 500ms;
+    animation-name: swing;
     cursor: pointer;
-    transition: 150ms ease-in-out;
 }
 
-.profile-dropdown {
+@keyframes swing {
+    20% {
+        transform: rotate(20deg);
+    }
+    50% {
+        transform: rotate(-20deg);
+    }
+    70% {
+        transform: rotate(20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#message-icon:hover {
+    animation: swing 500ms infinite;
+}
+
+#messages-container {
+    position: relative;
+}
+
+#messages {
     position: absolute;
-    right: 1%;
-    top: 125%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-10px);
-    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
-}
-
-.profile-dropdown-button {
-    background-color: inherit;
-    border: none;
-}
-
-.profile-dropdown-button.active+.profile-dropdown {
-    opacity: 1;
-    transform: translateY(5%);
-    pointer-events: auto;
-}
-
-.profile-dropdown-button .active>.profile-arrow-icon {
-    transform: rotate(180deg);
-}
-
-.profile-dropdown-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    height: 4rem;
-    width: 9rem;
-    transition: 500ms ease;
-    background-color: var(--cardBackgroundColor);
-    font-size: 1rem;
-}
-
-.profile-dropdown-link:hover {
-    font-size: 0.9rem;
+    max-width: 30rem;
+    height: fit-content;
+    top: 240%;
+    right: 0%;
 }
 
 #subject-container {
