@@ -1,3 +1,4 @@
+from email import message
 from flask import Blueprint, flash, render_template, request, url_for, jsonify, redirect
 from flask_login import current_user, login_required
 from Engine.models import Message, Subject, User
@@ -23,18 +24,28 @@ def _index():
 
 
 @index.get("/buy/<int:current_subject_id>")
+@login_required
 def buy_test(current_subject_id):
     # buying logic
     subject = db.session.get(Subject, current_subject_id)
 
-    admin = User.query.filter_by(Username=os.getenv('ADMIN')).first()
+    admin = User.query.filter_by(username=os.getenv('ADMIN')).first()
+
+    text = "{name} wants to buy a reviewer for {subject_name}".format(
+        name=current_user.first_name if current_user.first_name is not None else current_user.username, subject_name=subject.name)
 
     db.session.execute(insert(Message).values(
-        sender_id=current_user,
-        reciepient_id=admin),
-        body="{name} wants to buy a reviewer for {subject_name}".format(
-        name=current_user.first_name if current_user.first_name is not None else current_user.username, subject_name=subject.name))
+        sender_id=current_user.id,
+        recipient_id=admin.id,
+        body=text))
 
     db.session.commit()
-    flash(f"Successfully created account.")
-    return jsonify(message="Query sent! Please contact me for a faster transaction")
+    return jsonify(message="Buy request sent! Please contact me for a faster transaction")
+
+
+@index.get("/messages")
+@login_required
+def messages():
+    messages = current_user.messages
+
+    return jsonify([message.body for message in messages])
