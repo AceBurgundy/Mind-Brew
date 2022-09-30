@@ -16,6 +16,16 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+message = db.Table("Message",
+                   db.Column("id", db.Integer, primary_key=True),
+                   db.Column("sender", db.Integer, db.ForeignKey('user.id')),
+                   db.Column("receiver", db.Integer, db.ForeignKey('user.id')),
+                   db.Column("body", db.Text),
+                   db.Column("timestamp",
+                             db.DateTime, index=True, default=datetime.utcnow)
+                   )
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
