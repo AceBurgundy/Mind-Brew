@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, url_for
 from Engine import main_admin, db
-from Engine.models import User, Subject, Reviewer, Message
+from Engine.models import Message, User, Subject, Reviewer
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 import os
