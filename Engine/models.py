@@ -33,17 +33,19 @@ class User(db.Model, UserMixin):
         db.DateTime(), default=datetime.now, onupdate=datetime.now)
 
     subjects = db.relationship('Subject', backref='reviewer', lazy=True)
-    messages = db.relationship('Message', backref='messages', lazy=True)
+
+    messages = db.relationship(
+        'Message', backref='received_messages', lazy=True)
     # # this is not a column so we wont see a projects column in the User database. Instead,
     # # it runs a additional querry in the backrground to match the projects that the user has created
 
     def __repr__(self):
-        return f"User('{self.username}','{self.subjects}') "
+        return f"User('{self.subjects}','{self.messages}') "
 
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    sender_id = db.Column(db.Integer, nullable=False)
     recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
