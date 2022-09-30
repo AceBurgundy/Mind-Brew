@@ -59,6 +59,10 @@ body {
     cursor: pointer;
 }
 
+input {
+    background-color: inherit;
+}
+
 .round {
     border-radius: 50px;
 }
