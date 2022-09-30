@@ -12,7 +12,7 @@ document.querySelectorAll(".shopping-cart-line").forEach(shoppingCart => {
 
 $(document).ready(function() {
     $(".buy-button").on('click', function(event) {
-        makeToastNotification("Emailing Admin")
+        makeToastNotification("Notifying Admin")
         const link = $(this).attr('data-link')
         event.preventDefault()
         let request = $.get(
