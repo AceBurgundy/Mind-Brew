@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request, url_for, jsonify, redirect
+from flask import Blueprint, flash, render_template, request, url_for, jsonify, redirect
 from flask_login import current_user, login_required
-from Engine.models import Subject
-from Engine import mail, db
-from flask_mail import Message
+from Engine.models import Message, Subject, User
+from Engine import db
+from sqlalchemy import insert
 import os
 
 index = Blueprint('index', __name__, template_folder='templates/index',
@@ -25,12 +25,16 @@ def _index():
 @index.get("/buy/<int:current_subject_id>")
 def buy_test(current_subject_id):
     # buying logic
-    compose = Message(current_user.username + " wants to buy a Reviewer",
-                      sender=(current_user.email),
-                      recipients=[os.getenv('EMAIL')]
-                      )
     subject = db.session.get(Subject, current_subject_id)
-    compose.body = "{name} wants to buy a reviewer for {subject_name}".format(
-        name=current_user.first_name if current_user.first_name is not None else current_user.username, subject_name=subject.name)
-    mail.send(compose)
+
+    admin = User.query.filter_by(Username=os.getenv('ADMIN')).first()
+
+    db.session.execute(insert(Message).values(
+        sender_id=current_user,
+        reciepient_id=admin),
+        body="{name} wants to buy a reviewer for {subject_name}".format(
+        name=current_user.first_name if current_user.first_name is not None else current_user.username, subject_name=subject.name))
+
+    db.session.commit()
+    flash(f"Successfully created account.")
     return jsonify(message="Query sent! Please contact me for a faster transaction")

@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, url_for
 from Engine import main_admin, db
-from Engine.models import User, Subject, Reviewer, Notification, Message
+from Engine.models import User, Subject, Reviewer, Message
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
 import os
@@ -21,5 +21,4 @@ class myModelView(ModelView):
 main_admin.add_view(myModelView(User, db.session))
 main_admin.add_view(myModelView(Subject, db.session))
 main_admin.add_view(myModelView(Reviewer, db.session))
-main_admin.add_view(myModelView(Notification, db.session))
 main_admin.add_view(myModelView(Message, db.session))

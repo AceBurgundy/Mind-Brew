@@ -15,12 +15,3 @@ class Config:
     # Configure session to use filesystem (instead of signed cookies)
     SESSION_PERMANENT = False
     SESSION_TYPE = "filesystem"
-
-    # Email
-
-    MAIL_SERVER = os.getenv("MAIL_SERVER")
-    MAIL_PORT = 2525
-    MAIL_USERNAME = os.getenv("MAIL_USER")
-    MAIL_PASSWORD = os.getenv("MAIL_PASS")
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
