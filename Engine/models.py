@@ -51,6 +51,17 @@ class User(db.Model, UserMixin):
         return f"User('{self.username}','{self.subjects}') "
 
 
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Message('{self.sender_id}','{self.recipient_id}','{self.body}')"
+
+
 class Subject(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60))
