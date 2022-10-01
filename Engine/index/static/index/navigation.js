@@ -1,5 +1,16 @@
 const bell = document.getElementById('message-icon')
 
+document.querySelectorAll(".nav-icon").forEach(icon => {
+    icon.classList.add("load")
+})
+
+document.addEventListener("beforeunload", () => {
+    document.querySelectorAll(".nav-icon").forEach(icon => {
+        icon.classList.remove("load")
+    })
+
+})
+
 bell.addEventListener("click", () => {
 
     if (bell.nextElementSibling.classList.contains("active") == false) {
@@ -8,16 +19,14 @@ bell.addEventListener("click", () => {
 
         let request = $.get(link, "json")
 
-        request.done(function(newMessageList) {
+        request.done(function(messages) {
 
-            for (message of newMessageList) {
+            for (message of messages) {
                 let html = $(`<p>`)
                 html.addClass("notif")
                 html.text(message)
                 $('.messages').append(html)
             }
-
-            previousMessageList = newMessageList
 
         })
 
@@ -33,21 +42,3 @@ bell.addEventListener("click", () => {
     }
 
 })
-
-// $(function() {
-//     setInterval(function() {
-//         const link = $('.messages').attr('link')
-
-//         let request = $.get(link, "json")
-
-//         request.done(function(data) {
-//             for (const message of data) {
-//                 let html = $(`<p>`)
-//                 html.addClass("notif")
-//                 html.text(message)
-//                 $('.messages').append(html)
-//             }
-//     }, 100000);
-// });
-
-// unfinished poll for new Messages
