@@ -6,7 +6,7 @@ review = Blueprint('review', __name__,
                    template_folder='templates/review', static_folder='static/review')
 
 
-@review.get("/review/<int:current_subject_id>")
+@review.get("/start/<int:current_subject_id>")
 def start(current_subject_id):
 
     subject = db.session.get(Subject, current_subject_id)
