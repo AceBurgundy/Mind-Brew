@@ -9,14 +9,67 @@
 
 #navigation-menu {
     grid-area: navigation-rail;
-    background-color: var(--lighterBackgroundColor)
+    background-color: var(--lighterBackgroundColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding-top: 1rem;
+}
+
+.nav-child {
+    width: 90%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    color: var(--cardButtonTextColor);
+    transition: 250ms;
+}
+
+.nav-child:hover {
+    background-color: var(--cardBackgroundColor);
+}
+
+.nav-child:last-child {
+    background-color: inherit;
+}
+
+#book-icon {
+    height: fit-content;
+    width: 1.2rem;
+}
+
+.nav-icon {
+    margin: 0 1rem 0 0;
+    fill: var(--cardButtonTextColor);
+}
+
+#shopping-cart-line {
+    transition: 500ms;
+}
+
+#book-icon {
+    transition: 600ms;
+}
+
+#logout-icon {
+    transition: 700ms;
+}
+
+.nav-icon.load {
+    margin-left: 1rem;
+}
+
+#logout-icon {
+    width: 1.2rem;
 }
 
 #top-section {
     grid-area: top-bar;
     position: relative;
     z-index: 2;
-    background-color: var(--lighterBackgroundColor)
+    background-color: var(--lighterBackgroundColor);
+    border-bottom: 1px solid white;
 }
 
 #profile {
