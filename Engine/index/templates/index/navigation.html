@@ -7,11 +7,32 @@
 {% block main -%}
 <div id="grid-container">
     <section id="navigation-menu">
-        <div class="nav-child" id="account"></div>
-        <div class="nav-child" id="buy-reviewer"></div>
-        <div class="nav-child" id="logout">
-            <a href="{{ url_for('app-user.logout') }}">LOGOUT</a>
-        </div>
+        <a href="{{ url_for('index._index') }}" class="nav-child" id="buy-reviewer">
+            <svg class="icon nav-icon shopping-cart-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="80" cy="216" r="16"/><circle cx="184" cy="216" r="16"/><path fill="none" stroke="#c4c3cd" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" d="M42.28575,72H221.71429l-26.39873,92.39554A16,16,0,0,1,179.93118,176H84.06882a16,16,0,0,1-15.38438-11.60446L32.51492,37.80223A8,8,0,0,0,24.82273,32H8"/></svg>
+            <p>Buy Reviewer</p>
+        </a>
+        <a href="{{ url_for('index.library') }}" class="nav-child" id="my-reviewer">
+            <svg version="1.0" class="nav-icon icon" id="book-icon" xmlns="http://www.w3.org/2000/svg" width="50.000000pt" height="50.000000pt" viewBox="0 0 50.000000 50.000000" preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)"
+fill="#c4c3cd" stroke="none">
+<path d="M60 288 l0 -175 53 -7 c30 -3 73 -12 95 -20 37 -13 47 -13 84 0 22 8
+65 17 95 20 l53 7 0 175 0 175 -53 -7 c-30 -3 -73 -12 -95 -20 -37 -13 -47
+-13 -84 0 -22 8 -65 17 -95 20 l-53 7 0 -175z m143 130 l37 -11 0 -155 0 -154
+-22 6 c-13 4 -49 12 -80 18 l-58 12 0 154 0 155 43 -7 c23 -4 59 -12 80 -18z
+m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
+8 156 4 1 30 7 57 15 101 28 95 37 95 -138z"/>
+<path d="M20 241 l0 -168 68 -7 c37 -3 88 -13 115 -21 41 -12 53 -12 95 0 26
+8 77 18 115 21 l67 7 0 168 c0 106 -4 169 -10 169 -6 0 -10 -60 -10 -159 l0
+-159 -62 -7 c-35 -4 -82 -13 -105 -20 -35 -11 -51 -11 -85 0 -24 7 -71 16
+-105 20 l-63 7 0 159 c0 99 -4 159 -10 159 -6 0 -10 -63 -10 -169z"/>
+</g>
+</svg>
+            <p>My Reviewer</p>
+        </a>
+        <a class="nav-child" id="logout" href="{{ url_for('app-user.logout') }}">
+            <svg class="nav-icon icon" id="logout-icon" xmlns="http://www.w3.org/2000/svg" data-name="1" viewBox="0 0 128 128"><path d="M98 124H38V4h60a2 2 0 0 0 0-4H18A18 18 0 0 0 0 18v92a18 18 0 0 0 18 18h80a2 2 0 0 0 0-4ZM4 110V18A14 14 0 0 1 18 4h16v120H18a14 14 0 0 1-14-14Z"/><path d="m127.41 62.59-30-30a2 2 0 0 0-2.82 2.82L121.17 62H58a2 2 0 0 0 0 4h63.17L94.59 92.59a2 2 0 1 0 2.82 2.82l30-30a2 2 0 0 0 0-2.82Z"/></svg>
+            <p>Log Out</p>
+        </a>
     </section>
 
     <section id="top-section">
