@@ -14,7 +14,7 @@ index = Blueprint('index', __name__, template_folder='templates/index',
 @login_required
 def _index():
     """Show all available reviewers"""
-    pageTitle = "DASHBOARD"
+    pageTitle = "Dashboard"
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
@@ -25,7 +25,7 @@ def _index():
 @index.get("/library")
 def library():
     """Show bought reviewers"""
-    pageTitle = "LIBRARY"
+    pageTitle = "Library"
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 

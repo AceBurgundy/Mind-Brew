@@ -7,6 +7,9 @@
 {% block main -%}
 <div id="grid-container">
     <section id="navigation-menu">
+        <div class="nav-child">
+            <p id="section-title">{{ pageTitle }}</p>
+        </div>
         <a href="{{ url_for('index._index') }}" class="nav-child" id="buy-reviewer">
             <svg class="icon nav-icon shopping-cart-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="80" cy="216" r="16"/><circle cx="184" cy="216" r="16"/><path fill="none" stroke="#c4c3cd" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" d="M42.28575,72H221.71429l-26.39873,92.39554A16,16,0,0,1,179.93118,176H84.06882a16,16,0,0,1-15.38438-11.60446L32.51492,37.80223A8,8,0,0,0,24.82273,32H8"/></svg>
             <p>Buy Reviewer</p>
@@ -36,6 +39,9 @@ m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
     </section>
 
     <section id="top-section">
+        <div id="title-container">
+            <p id="title">Mind Brew</p>
+        </div>
         <div id="profile">
             <div id="messages-container">
                 <svg class="icon" id="message-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" viewBox="0 0 32 32"><path fill="#fff" d="M4 21C4 18.7909 5.79086 17 8 17H24C26.2091 17 28 18.7909 28 21C28 23.2091 26.2091 25 24 25H8C5.79086 25 4 23.2091 4 21ZM8 19C6.89543 19 6 19.8954 6 21C6 22.1046 6.89543 23 8 23H24C25.1046 23 26 22.1046 26 21C26 19.8954 25.1046 19 24 19H8Z" clip-rule="evenodd"/><path fill="#000" d="M13 28C13 27.4477 13.4477 27 14 27H18C18.5523 27 19 27.4477 19 28V28C19 28.5523 18.5523 29 18 29H14C13.4477 29 13 28.5523 13 28V28Z"/><path fill="#fff" fill-rule="evenodd" d="M7 14C7 9.02944 11.0294 5 16 5C20.9706 5 25 9.02944 25 14V18H23V14C23 10.134 19.866 7 16 7C12.134 7 9 10.134 9 14V18H7V14Z" clip-rule="evenodd"/><path fill="#fff" fill-rule="evenodd" d="M16 4C15.4477 4 15 4.44772 15 5V6H13V5C13 3.34315 14.3431 2 16 2C17.6569 2 19 3.34315 19 5V6H17V5C17 4.44772 16.5523 4 16 4Z" clip-rule="evenodd"/></svg>
