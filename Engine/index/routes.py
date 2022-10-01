@@ -10,17 +10,27 @@ index = Blueprint('index', __name__, template_folder='templates/index',
                   static_folder='static/index', )
 
 
-@index.route("/")
+@index.get("/")
 @login_required
 def _index():
-    """Show all user projects"""
+    """Show all available reviewers"""
     pageTitle = "DASHBOARD"
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
-    if request.method == "GET":
-        subjects = Subject.query.all()
-        return render_template("index.html", subjects=subjects, image_file=image_file, pageTitle=pageTitle)
+    subjects = Subject.query.all()
+    return render_template("index.html", subjects=subjects, image_file=image_file, pageTitle=pageTitle)
+
+
+@index.get("/library")
+def library():
+    """Show bought reviewers"""
+    pageTitle = "LIBRARY"
+    image_file = url_for(
+        'static', filename='profile_pictures/' + current_user.profile_picture)
+
+    reviewers = current_user.subjects
+    return render_template("index.html", reviewers=reviewers, image_file=image_file, pageTitle=pageTitle)
 
 
 @index.get("/buy/<int:current_subject_id>")
