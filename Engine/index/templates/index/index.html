@@ -10,8 +10,7 @@
 {%- endblock component_script %}
 
 <!-- {# subject section #} -->
-{% block subjects -%}
-
+{% block subjects -%} {% if pageTitle == 'DASHBOARD' -%}
 <main id="subjects">
     <div id="message-div">
         <p class="header" id="welcome-message">Welcome back <span class="header" id="welcome-username">{{current_user.username}}!</span></p>
@@ -34,4 +33,25 @@
         {%- endfor %}
     </div>
 </main>
-{%- endblock subjects %}
+{%- else -%}
+<main id="subjects">
+    <div id="message-div">
+        <p class="header" id="welcome-message">Welcome back <span class="header" id="welcome-username">{{current_user.username}}!</span></p>
+        <div id="options" class="icon-button">
+            <svg class="icon" id="menu-horizontal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,10a2,2,0,1,0,2,2A2,2,0,0,0,12,10ZM5,10a2,2,0,1,0,2,2A2,2,0,0,0,5,10Zm14,0a2,2,0,1,0,2,2A2,2,0,0,0,19,10Z"/></svg>
+        </div>
+    </div>
+    <div id="subject-list">
+        {% for reviewer in reviewers -%}
+        <div class="subject">
+            <div class="subject-title">{{ reviewer.name }}</div>
+            <div class="subject-options">
+                <a href="{{url_for('review.start', current_subject_id=reviewer.id)}}" class="subject-button icon-button">
+                    <p>Start</p>
+                </a>
+            </div>
+        </div>
+        {%- endfor %}
+    </div>
+</main>
+{%- endif %} {%- endblock subjects %}
