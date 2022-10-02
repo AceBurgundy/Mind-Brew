@@ -85,7 +85,7 @@
 }
 
 #title-container {
-    font-size: 2rem;
+    font-size: 1.5rem;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -176,7 +176,7 @@
     border-radius: 10px;
 }
 
-#subject-container {
+#reviewer-container {
     grid-area: main-content;
     position: relative;
     z-index: 1;
