@@ -12,9 +12,9 @@
         </div>
         <a href="{{ url_for('index._index') }}" class="nav-child" id="buy-reviewer">
             <svg class="icon nav-icon shopping-cart-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="80" cy="216" r="16"/><circle cx="184" cy="216" r="16"/><path fill="none" stroke="#c4c3cd" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" d="M42.28575,72H221.71429l-26.39873,92.39554A16,16,0,0,1,179.93118,176H84.06882a16,16,0,0,1-15.38438-11.60446L32.51492,37.80223A8,8,0,0,0,24.82273,32H8"/></svg>
-            <p>Buy Reviewer</p>
+            <p>Library</p>
         </a>
-        <a href="{{ url_for('index.library') }}" class="nav-child" id="my-reviewer">
+        <a href="{{ url_for('index.collection') }}" class="nav-child" id="my-reviewer">
             <svg version="1.0" class="nav-icon icon" id="book-icon" xmlns="http://www.w3.org/2000/svg" width="50.000000pt" height="50.000000pt" viewBox="0 0 50.000000 50.000000" preserveAspectRatio="xMidYMid meet">
 <g transform="translate(0.000000,50.000000) scale(0.100000,-0.100000)"
 fill="#c4c3cd" stroke="none">
@@ -30,7 +30,7 @@ m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
 -105 20 l-63 7 0 159 c0 99 -4 159 -10 159 -6 0 -10 -63 -10 -169z"/>
 </g>
 </svg>
-            <p>My Reviewer</p>
+            <p>Collection</p>
         </a>
         <a class="nav-child" id="logout" href="{{ url_for('app-user.logout') }}">
             <svg class="nav-icon icon" id="logout-icon" xmlns="http://www.w3.org/2000/svg" data-name="1" viewBox="0 0 128 128"><path d="M98 124H38V4h60a2 2 0 0 0 0-4H18A18 18 0 0 0 0 18v92a18 18 0 0 0 18 18h80a2 2 0 0 0 0-4ZM4 110V18A14 14 0 0 1 18 4h16v120H18a14 14 0 0 1-14-14Z"/><path d="m127.41 62.59-30-30a2 2 0 0 0-2.82 2.82L121.17 62H58a2 2 0 0 0 0 4h63.17L94.59 92.59a2 2 0 1 0 2.82 2.82l30-30a2 2 0 0 0 0-2.82Z"/></svg>
@@ -54,8 +54,8 @@ m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
         </div>
     </section>
 
-    <main id="subjects-container">
-        {% block subjects -%} {%- endblock subjects %}
+    <main id="reviewers-container">
+        {% block reviewers -%} {%- endblock reviewers %}
         <!--  -->{% block profile -%}{%- endblock profile %}
     </main>
 </div>
