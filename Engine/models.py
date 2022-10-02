@@ -80,6 +80,8 @@ class Reviewer(db.Model, UserMixin):
     creation_date = db.Column(
         db.DateTime(), default=datetime.now, nullable=False)
     author = db.Column(db.String(80), nullable=False)
+    image = db.Column(
+        db.String(100), nullable=False, default='reviewer.jpg')
     score = db.Column(db.Integer, nullable=False, default=0)
     availablility = db.Column(db.Boolean, nullable=False, default=True)
     students = db.Column(db.Integer, db.ForeignKey('user.id'))
