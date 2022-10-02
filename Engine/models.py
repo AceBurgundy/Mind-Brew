@@ -16,6 +16,20 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+attempts = db.Table(
+    db.Column("id", db.Integer, primary_key=True, nullable=False),
+    db.Column("reviewer_id", db.Integer, db.ForeignKey(
+        'reviewer.id'), nullable=False),
+    db.Column("user_id", db.Integer, db.ForeignKey(
+        'user.id'), nullable=False),
+    db.Column("status", db.String(20), nullable=False),
+    db.Column("score", db.Integer, nullable=False, default=0),
+    db.Column("start_time", db.DateTime(),
+              default=datetime.now, nullable=False),
+    db.Column("end_time", db.DateTime(), default=datetime.now),
+)
+
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
