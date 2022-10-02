@@ -21,6 +21,12 @@ bell.addEventListener("click", () => {
 
         request.done(function(messages) {
 
+            if (messages.length == 0) {
+                let html = $(`<p>`)
+                html.addClass("notif")
+                html.text("No Notifications Yet")
+                $('.messages').append(html)
+            } else {
             for (message of messages) {
                 let html = $(`<p>`)
                 html.addClass("notif")
