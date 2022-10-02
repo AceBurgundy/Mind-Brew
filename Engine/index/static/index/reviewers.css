@@ -1,10 +1,11 @@
 @import "/static/root.css";
 @import "/static/fonts.css";
-#subjects {
+#reviewers {
     margin: 5em;
+    margin-top: 3em;
     display: flex;
     flex-direction: column;
-    gap: 4em;
+    gap: 3em;
 }
 
 #message-div {
@@ -13,19 +14,20 @@
     align-items: center;
 }
 
-#subject-list {
+#reviewer-list {
     display: flex;
     gap: 1.5em;
     height: fit-content;
 }
 
-.subject {
+.reviewer {
     background-color: var(--cardBackgroundColor);
     width: 175px;
     height: 210px;
     border-radius: 25px;
-    padding: 1.5em;
-    padding-top: 3em;
+    padding: 1em;
+    padding-left: 1.5em;
+    padding-top: 1.5em;
     padding-bottom: 1em;
     cursor: pointer;
     display: flex;
@@ -41,7 +43,7 @@
     fill: var(--defaultIconFill);
 }
 
-.subject-options {
+.reviewer-options {
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -50,11 +52,11 @@
 }
 
 .score,
-.subject-score {
+.reviewer-score {
     font-size: 0.8rem;
 }
 
-.subject-button {
+.reviewer-button {
     background-color: var(--buttonColor)
 }
 
@@ -74,6 +76,6 @@
     display: none;
 }
 
-.subject-title {
+.reviewer-title {
     font-family: "Poppins Medium";
 }
