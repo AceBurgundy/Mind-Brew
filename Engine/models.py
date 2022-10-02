@@ -31,7 +31,7 @@ attempts = db.Table(
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     username = db.Column(db.String(50), nullable=False, unique=True)
     first_name = db.Column(db.String(60))
     last_name = db.Column(db.String(60))
@@ -42,72 +42,104 @@ class User(db.Model, UserMixin):
     profile_picture = db.Column(
         db.String(100), nullable=False, default='default.jpg')
     password = db.Column(db.String(200), nullable=False)
-    creation_date = db.Column(db.DateTime(), default=datetime.now)
+    creation_date = db.Column(
+        db.DateTime(), default=datetime.now, nullable=False)
     last_online = db.Column(
-        db.DateTime(), default=datetime.now, onupdate=datetime.now)
+        db.DateTime(), default=datetime.now, onupdate=datetime.now, nullable=False)
 
-    subjects = db.relationship('Subject', backref='reviewer', lazy=True)
+    reviewers = db.relationship('Reviewer', backref='owned_by', lazy=True)
 
     messages = db.relationship(
         'Message', backref='received_messages', lazy=True)
+
+    attempts = db.relationship(
+        'Project', secondary=attempts, backref='taker')
     # # this is not a column so we wont see a projects column in the User database. Instead,
     # # it runs a additional querry in the backrground to match the projects that the user has created
 
     def __repr__(self):
-        return f"User('{self.subjects}','{self.messages}') "
+        return f"User('{self.username}','{self.reviewers}','{self.messages}') "
 
 
-class Message(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+class Message(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
     sender_id = db.Column(db.Integer, nullable=False)
-    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    body = db.Column(db.Text)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    recipient_id = db.Column(
+        db.Integer, db.ForeignKey('user.id'), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, index=True,
+                          default=datetime.utcnow, nullable=False)
 
     def __repr__(self):
         return f"Message('{self.sender_id}','{self.recipient_id}','{self.body}')"
 
 
-class Subject(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60))
-    creation_date = db.Column(db.DateTime(), default=datetime.now)
-    professor = db.Column(db.String(80))
+class Reviewer(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String(60), nullable=False)
+    creation_date = db.Column(
+        db.DateTime(), default=datetime.now, nullable=False)
+    author = db.Column(db.String(80), nullable=False)
     image = db.Column(
         db.String(100), nullable=False, default='subject.jpg')
     score = db.Column(db.Integer, nullable=False, default=0)
-    code = db.Column(db.String(40), nullable=False)
-    available_test = db.Column(db.Boolean, nullable=False, default=True)
-
+    availablility = db.Column(db.Boolean, nullable=False, default=True)
     students = db.Column(db.Integer, db.ForeignKey('user.id'))
-    questions = db.relationship('Reviewer', backref='subject', lazy=True)
+    questions = db.relationship(
+        'Question', backref='reviewer', lazy=True, passive_deletes=True)
 
     def __repr__(self):
-        return f"Subject('{self.name}','{self.professor}') "
+        return f"Reviewer('{self.name}','{self.author}') "
 
 
-class Reviewer(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    recent_review = db.Column(
-        db.DateTime(), default=datetime.now, onupdate=datetime.now)
-    question = db.Text()
-    choice_1 = db.Column(db.String(100), nullable=False)
-    choice_2 = db.Column(db.String(100), nullable=False)
-    choice_3 = db.Column(db.String(100), nullable=False)
-    choice_4 = db.Column(db.String(100), nullable=False)
-    correct_answer = db.Column(db.String(100), nullable=False)
-    subject_id = db.Column(db.Integer, db.ForeignKey(
-        'subject.id'), nullable=False)
+class Question(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    creation_date = db.Column(
+        db.DateTime(), default=datetime.now, nullable=False)
+    updated_date = db.Column(
+        db.DateTime(), default=datetime.now, onupdate=datetime.now, nullable=False)
 
-    def __repr__(self):
-        return f"Reviewer('{self.question}','{self.correct_answer}')"
+    question = db.Column(db.String(1000), nullable=False)
 
+    choices = db.relationship(
+        'Choice', backref='question', lazy=True, passive_deletes=True)
 
-class BufferAnswers(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    answer = db.Column(db.String(100), nullable=False)
+    answers = db.relationship(
+        'Choice', backref='question', lazy=True, uselist=False, passive_deletes=True)
+
     reviewer_id = db.Column(db.Integer, db.ForeignKey(
-        'reviewer.id'), nullable=False)
+        'reviewer.id'), nullable=False, ondelete="CASCADE")
 
     def __repr__(self):
-        return f"BufferAnswers('{self.answer}')"
+        return f"Question('{self.question}')"
+
+
+class Choice(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    creation_date = db.Column(
+        db.DateTime(), default=datetime.now, nullable=False)
+    updated_date = db.Column(
+        db.DateTime(), default=datetime.now, onupdate=datetime.now, nullable=False)
+    choice = db.Column(db.String(100), nullable=False)
+
+    question_id = db.Column(db.Integer, db.ForeignKey(
+        'question.id'), nullable=False, ondelete="CASCADE")
+
+    def __repr__(self):
+        return f"Choice('{self.choice}')"
+
+
+class Answer(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    creation_date = db.Column(
+        db.DateTime(), default=datetime.now, nullable=False)
+    updated_date = db.Column(
+        db.DateTime(), default=datetime.now, onupdate=datetime.now, nullable=False)
+
+    answer = db.Column(db.String(100), nullable=False)
+
+    question_id = db.Column(db.Integer, db.ForeignKey(
+        'question.id'), nullable=False, ondelete="CASCADE")
+
+    def __repr__(self):
+        return f"Answer('{self.answer}')"
