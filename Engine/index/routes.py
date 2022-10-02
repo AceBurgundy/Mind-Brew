@@ -41,8 +41,8 @@ def buy_test(current_reviewer_id):
 
     admin = User.query.filter_by(username=os.getenv('ADMIN')).first()
 
-    text = "{name} wants to buy a reviewer for {subject_name}".format(
-        name=current_user.first_name if current_user.first_name is not None else current_user.username, subject_name=subject.name)
+    text = "{name} wants to buy a reviewer for {reviewer_name}".format(
+        name=current_user.first_name if current_user.first_name is not None else current_user.username, reviewer_name=reviewer.name)
 
     db.session.execute(insert(Message).values(
         sender_id=current_user.id,
