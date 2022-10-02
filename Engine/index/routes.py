@@ -1,7 +1,7 @@
 from email import message
 from flask import Blueprint, flash, render_template, request, url_for, jsonify, redirect
 from flask_login import current_user, login_required
-from Engine.models import Message, Subject, User
+from Engine.models import Message, Reviewer, User
 from Engine import db
 from sqlalchemy import insert
 import os
@@ -18,8 +18,8 @@ def _index():
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
-    subjects = Subject.query.all()
-    return render_template("index.html", subjects=subjects, image_file=image_file, pageTitle=pageTitle)
+    reviewers = Reviewer.query.all()
+    return render_template("index.html", reviewers=reviewers, image_file=image_file, pageTitle=pageTitle)
 
 
 @index.get("/library")
@@ -29,15 +29,15 @@ def library():
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
-    subjects = current_user.subjects
-    return render_template("index.html", subjects=subjects, image_file=image_file, pageTitle=pageTitle)
+    reviewers = current_user.reviewers
+    return render_template("index.html", reviewers=reviewers, image_file=image_file, pageTitle=pageTitle)
 
 
-@index.get("/buy/<int:current_subject_id>")
+@index.get("/buy/<int:current_reviewer_id>")
 @login_required
-def buy_test(current_subject_id):
+def buy_test(current_reviewer_id):
     # buying logic
-    subject = db.session.get(Subject, current_subject_id)
+    reviewer = db.session.get(Reviewer, current_reviewer_id)
 
     admin = User.query.filter_by(username=os.getenv('ADMIN')).first()
 
