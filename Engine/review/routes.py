@@ -10,5 +10,4 @@ review = Blueprint('review', __name__,
 def start(current_reviewer_id):
 
     questions = Test.query.filter_by(reviewer_id=current_reviewer_id)
-
     return render_template('test.html', questions=questions)
