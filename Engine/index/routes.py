@@ -22,10 +22,10 @@ def _index():
     return render_template("index.html", reviewers=reviewers, image_file=image_file, pageTitle=pageTitle)
 
 
-@index.get("/library")
-def library():
+@index.get("/collection")
+def collection():
     """Show bought reviewers"""
-    pageTitle = "Library"
+    pageTitle = "Collection"
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
