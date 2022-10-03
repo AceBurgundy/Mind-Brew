@@ -1,0 +1,24 @@
+{% extends 'navigation.html' %}
+
+<!-- {# styles #} -->
+{% block component_style -%}
+<link rel="stylesheet" href="{{ url_for('review.static', filename='review.css') }}"> {% endblock component_style %}
+
+<!-- {# scripts #} -->
+{% block component_script -%}
+<script src="{{ url_for('review.static', filename='review.js')}}" defer></script>
+{%- endblock component_script %}
+
+<!-- {# reviewer section #} -->
+{% block review -%}
+<main id="review">
+    {% for question in questions -%}
+    <div class="review-item">
+        <div class="question" data-quiz-id="{{ question.id }}">{{ question }}</div>
+        {% for choice in question.choices -%}
+        <div class="choice" data-choice-id="{{ choice.id }}">{{ choice }}</div>
+        {%- endfor %}
+    </div>
+    {%- endfor %}
+</main>
+{%- endblock review %}
