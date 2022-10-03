@@ -6,7 +6,7 @@
 <!-- {# main #} -->
 {% block main -%}
 <div id="grid-container">
-    <section id="navigation-menu">
+    <section id="navigation-section">
         <div class="nav-child">
             <p id="section-title">{{ pageTitle }}</p>
         </div>
@@ -54,9 +54,12 @@ m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
         </div>
     </section>
 
-    <main id="reviewers-container">
+    <section id="main-section">
         {% block reviewers -%} {%- endblock reviewers %}
-        <!--  -->{% block profile -%}{%- endblock profile %}
-    </main>
+        <!--  -->
+        {% block profile -%}{%- endblock profile %}
+        <!--  -->
+        {% block review -%} {%- endblock review %}
+    </section>
 </div>
 {%- endblock main %}
