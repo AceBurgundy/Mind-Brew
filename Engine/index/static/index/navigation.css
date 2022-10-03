@@ -7,7 +7,7 @@
     grid-template-areas: "top-bar top-bar" "navigation-rail main-content" "navigation-rail main-content";
 }
 
-#navigation-menu {
+#navigation-section {
     grid-area: navigation-rail;
     background-color: var(--lighterBackgroundColor);
     display: flex;
@@ -176,7 +176,7 @@
     border-radius: 10px;
 }
 
-#reviewer-container {
+#main-section {
     grid-area: main-content;
     position: relative;
     z-index: 1;
