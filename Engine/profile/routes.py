@@ -15,16 +15,18 @@ profile = Blueprint('profile', __name__,
 @profile.get("/profile")
 @login_required
 def _profile():
+    pageTitle = "Profile"
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
-    return render_template("profile.html", image_file=image_file, user=db.session.get(User, current_user.id))
+    return render_template("profile.html", pageTitle=pageTitle, image_file=image_file, user=db.session.get(User, current_user.id))
 
 
 @profile.route("/edit", methods=["POST", "GET"])
 @login_required
 def edit_profile():
 
+    pageTitle = "Edit Profile"
     form = profileForm()
     passForm = ChangePassword()
     image_file = url_for(
@@ -45,7 +47,7 @@ def edit_profile():
             db.session.commit()
             return redirect(url_for('profile._profile'))
         else:
-            return render_template('edit-profile.html', form=form, image_file=image_file, passForm=passForm, error=form.errors)
+            return render_template('edit-profile.html', pageTitle=pageTitle, form=form, image_file=image_file, passForm=passForm, error=form.errors)
     else:
         image_file = url_for(
             'static', filename='profile_pictures/' + current_user.profile_picture)
@@ -56,7 +58,7 @@ def edit_profile():
         form.course.data = current_user.course
         form.phone.data = current_user.phone
 
-        return render_template("edit-profile.html", form=form, image_file=image_file, passForm=passForm)
+        return render_template("edit-profile.html", pageTitle=pageTitle, form=form, image_file=image_file, passForm=passForm)
 
 
 @profile.route("/change-password", methods=["POST"])
