@@ -1,5 +1,12 @@
 import { makeToastNotification } from "/static/helper.js"
 
+if (document.querySelectorAll(".unavailable") != false) {
+    document.querySelectorAll(".unavailable").forEach(unavailbleReviewer => {
+        unavailbleReviewer.parentElement.style.opacity = 0.6;
+        unavailbleReviewer.parentElement.style.pointerEvents = 'none';
+    })
+}
+
 document.querySelectorAll(".shopping-cart-line").forEach(shoppingCart => {
     shoppingCart.addEventListener("mouseover", () => {
         shoppingCart.children[3].style.transition = '300ms'
