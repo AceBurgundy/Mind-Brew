@@ -13,14 +13,14 @@ def start(current_reviewer_id):
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
 
-    attempts = current_user.attempts
+    # attempts = current_user.attempts
 
-    score = 0
+    # score = 0
 
-    for attempt in attempts:
-        if attempt.reviewer_id == current_reviewer_id:
-            score = attempt.score
-            break
+    # for attempt in attempts:
+    #     if attempt.reviewer_id == current_reviewer_id:
+    #         score = attempt.score
+    #         break
 
     questions = Question.query.filter_by(reviewer_id=current_reviewer_id)
 
