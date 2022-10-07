@@ -1,1 +1,51 @@
 @import "/static/root.css";
+#review {
+    max-width: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin: 2em auto;
+}
+
+.question {
+    font-size: 1.2rem;
+    padding: 1em;
+}
+
+.review-item {
+    background-color: var(--cardBackgroundColor);
+}
+
+.choices-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    padding: 1em;
+    gap: 0.5em;
+}
+
+.choice {
+    padding: 1em;
+    border-radius: 10px;
+    transition: 100ms;
+    cursor: pointer;
+}
+
+.choice:hover {
+    background-color: var(--buttonColor);
+}
+
+.choice.chose {
+    background-color: var(--buttonColor);
+    color: black;
+}
+
+.choice.correct {
+    background-color: rgb(95, 201, 95);
+    color: black;
+}
+
+.choice.wrong {
+    background-color: rgb(128, 50, 50);
+}
