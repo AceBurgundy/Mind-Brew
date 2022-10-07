@@ -14,10 +14,12 @@
 <main id="review">
     {% for question in questions -%}
     <div class="review-item">
-        <div class="question" data-quiz-id="{{ question.id }}">{{ question }}</div>
-        {% for choice in question.choices -%}
-        <div class="choice" data-choice-id="{{ choice.id }}">{{ choice }}</div>
-        {%- endfor %}
+        <div class="question" data-question-id="{{ question.id }}">{{ question.question }}</div>
+        <div class="choices-container">
+            {% for choice in question.choices -%}
+            <div class="choice" data-choice-id="{{ choice.id }}">{{ choice.choice }}</div>
+            {%- endfor %}
+        </div>
     </div>
     {%- endfor %}
 </main>
