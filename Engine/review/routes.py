@@ -24,4 +24,4 @@ def start(current_reviewer_id):
 
     questions = Question.query.filter_by(reviewer_id=current_reviewer_id)
 
-    return render_template('review.html', score=score, pageTitle=pageTitle, image_file=image_file, questions=questions)
+    return render_template('review.html', pageTitle=pageTitle, image_file=image_file, questions=questions)
