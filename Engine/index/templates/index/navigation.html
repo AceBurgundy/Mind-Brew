@@ -1,5 +1,5 @@
 {%- block scripts %}
-<script src="{{ url_for( 'index.static' , filename='navigation.js')  }}" defer></script>
+<script src="{{ url_for( 'index.static' , filename='navigation.js')  }}" type="module"></script>
 {% endblock scripts -%} {% extends "head.html" %} {%- block style %}
 <link rel="stylesheet" href="{{ url_for( 'index.static' , filename='navigation.css')}}"> {% endblock style -%}
 
@@ -32,6 +32,12 @@ m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
 </svg>
             <p>Collection</p>
         </a>
+        {% if current_user.username == admin -%}
+        <a class="nav-child" id="admin" href="{{ url_for('admin.index') }}">
+            <svg class="nav-icon icon" id="key-icon" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M21.8534546,2.1587524c-0.1918335-0.1986084-0.5083618-0.2041016-0.7069702-0.0122681l-5.4326172,5.4321899c-0.0072632,0.0065918-0.0167847,0.0089722-0.0237427,0.0161133c-0.0062866,0.0064087-0.0081787,0.0150757-0.0140991,0.0217285l-6.381958,6.3814087C8.5245361,13.3829956,7.5617065,13,6.5,13C4.0147095,13,2,15.0147095,2,17.5S4.0147095,22,6.5,22c2.4841309-0.0026855,4.4973145-2.0158691,4.5-4.5c0-1.0621948-0.3833618-2.0253906-0.9988403-2.795105l6.0498657-6.0493774l1.767334,1.767334c0.0936279,0.0939331,0.2208862,0.1466675,0.3535156,0.1464844v0.000061c0.1325684-0.000061,0.2596436-0.0527344,0.3533936-0.1464233c0.1953125-0.1952515,0.1953125-0.5118408,0.0001221-0.7071533l-1.767334-1.767334l2.1216431-2.121521l1.7677612,1.7677612c0.093689,0.0939331,0.2208862,0.1466675,0.3535156,0.1464844c0.1325684,0,0.2597046-0.0526733,0.3533936-0.1463623c0.1953125-0.1952515,0.1953735-0.5118408,0.0001221-0.7070923L19.586792,5.1199951l2.2666626-2.2665405C22.0406494,2.659729,22.0406494,2.3525391,21.8534546,2.1587524z M6.5,21C4.5670166,21,3,19.4329834,3,17.5S4.5670166,14,6.5,14c1.9320068,0.0023193,3.4976807,1.5679932,3.5,3.5C10,19.4329834,8.4329834,21,6.5,21z"/></svg>
+            <p>Admin</p>
+        </a>
+        {%- endif %}
         <a class="nav-child" id="logout" href="{{ url_for('app-user.logout') }}">
             <svg class="nav-icon icon" id="logout-icon" xmlns="http://www.w3.org/2000/svg" data-name="1" viewBox="0 0 128 128"><path d="M98 124H38V4h60a2 2 0 0 0 0-4H18A18 18 0 0 0 0 18v92a18 18 0 0 0 18 18h80a2 2 0 0 0 0-4ZM4 110V18A14 14 0 0 1 18 4h16v120H18a14 14 0 0 1-14-14Z"/><path d="m127.41 62.59-30-30a2 2 0 0 0-2.82 2.82L121.17 62H58a2 2 0 0 0 0 4h63.17L94.59 92.59a2 2 0 1 0 2.82 2.82l30-30a2 2 0 0 0 0-2.82Z"/></svg>
             <p>Log Out</p>
@@ -45,7 +51,7 @@ m217 -131 l0 -153 -57 -12 c-32 -6 -68 -14 -80 -18 l-23 -6 0 156 c0 86 3 156
         <div id="profile">
             <div id="messages-container">
                 <svg class="icon" id="message-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff" viewBox="0 0 32 32"><path fill="#fff" d="M4 21C4 18.7909 5.79086 17 8 17H24C26.2091 17 28 18.7909 28 21C28 23.2091 26.2091 25 24 25H8C5.79086 25 4 23.2091 4 21ZM8 19C6.89543 19 6 19.8954 6 21C6 22.1046 6.89543 23 8 23H24C25.1046 23 26 22.1046 26 21C26 19.8954 25.1046 19 24 19H8Z" clip-rule="evenodd"/><path fill="#000" d="M13 28C13 27.4477 13.4477 27 14 27H18C18.5523 27 19 27.4477 19 28V28C19 28.5523 18.5523 29 18 29H14C13.4477 29 13 28.5523 13 28V28Z"/><path fill="#fff" fill-rule="evenodd" d="M7 14C7 9.02944 11.0294 5 16 5C20.9706 5 25 9.02944 25 14V18H23V14C23 10.134 19.866 7 16 7C12.134 7 9 10.134 9 14V18H7V14Z" clip-rule="evenodd"/><path fill="#fff" fill-rule="evenodd" d="M16 4C15.4477 4 15 4.44772 15 5V6H13V5C13 3.34315 14.3431 2 16 2C17.6569 2 19 3.34315 19 5V6H17V5C17 4.44772 16.5523 4 16 4Z" clip-rule="evenodd"/></svg>
-                <div link="{{ url_for('index.messages') }}" class="messages">
+                <div link="{{ url_for('index.messages') }}" class="messages glassmorphism">
                 </div>
             </div>
             <a href="{{ url_for('profile._profile') }}" id="profile-picture-main">
