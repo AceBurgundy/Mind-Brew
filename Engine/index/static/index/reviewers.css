@@ -23,16 +23,23 @@
 .reviewer {
     background-color: var(--cardBackgroundColor);
     width: 175px;
-    height: 210px;
+    height: 230px;
     border-radius: 25px;
-    padding: 1em;
-    padding-left: 1.5em;
-    padding-top: 1.5em;
+    padding: 1.25em;
     padding-bottom: 1em;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.unavailable {
+    margin: 0 auto;
+}
+
+.unavailable p {
+    font-size: 1.2rem;
+    transform: rotate(40deg);
 }
 
 #options {
