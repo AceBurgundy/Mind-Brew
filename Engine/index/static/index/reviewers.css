@@ -1,7 +1,6 @@
 @import "/static/root.css";
 @import "/static/fonts.css";
 #reviewers {
-    margin: 5em;
     margin-top: 3em;
     display: flex;
     flex-direction: column;
