@@ -1,0 +1,45 @@
+{% extends 'navigation.html' %}
+
+<!-- {# styles #} -->
+{% block component_style -%}
+<link rel="stylesheet" href="{{ url_for('review.static', filename='review.css') }}"> {% endblock component_style %}
+
+<!-- {# scripts #} -->
+{% block component_script -%}
+<script src="{{ url_for('review.static', filename='score.js')}}" type="module"></script>
+{%- endblock component_script %}
+
+<!-- {# score section #} -->
+{% block review -%}
+<main id="review">
+    <!--  -->
+    {% for question in questions -%}
+    <!--  -->
+    <div class="review-item">
+        <div class="question">{{ question.question.question }}</div>
+        <div class="choices-container">
+            {% for choice in question.question.choices -%}
+            <!--  -->
+            {% if choice.choice == question.choice.choice %}
+            <div class="choice wrong">{{ choice.choice }}</div>
+            {%- elif choice.choice == question.answer.answer -%}
+            <div class="choice correct">{{ choice.choice }}</div>
+            {%- else %}
+            <div class="choice">{{ choice.choice }}</div>
+            {%- endif %} {%- endfor %}
+        </div>
+    </div>
+    <!--  -->
+    {%- endfor %}
+    <a id="retry" class="submit-retry button" href="{{ url_for('review.start', current_reviewer_id=reviewer_id)}}">RETRY</a>
+    <!--  -->
+    <div id="score-container">
+        <p id="score"><span id="score-title">Score: </span>{{ score }}/{{questions_length|length}}</p>
+        <ul>
+            {% for name,value in score_per_subject.items() %}
+            <li>{{ name }} : {{value}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</main>
+{%- endblock review %}
