@@ -4,7 +4,6 @@ from flask_login import current_user, login_required
 from Engine.models import Message, Reviewer, User, Question
 from Engine import db
 from sqlalchemy import insert
-from Engine.helpers import addBasicData
 import os
 
 index = Blueprint('index', __name__, template_folder='templates/index',
@@ -57,7 +56,7 @@ def buy_test(current_reviewer_id):
         body=text))
 
     db.session.commit()
-    return jsonify(message="Buy request sent! Please contact me for a faster transactio     n")
+    return jsonify(message="Buy request sent! Please contact me for a faster transaction")
 
 
 @ index.get("/messages")
