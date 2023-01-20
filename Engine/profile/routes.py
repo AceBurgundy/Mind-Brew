@@ -18,7 +18,6 @@ def _profile():
     pageTitle = "Profile"
     image_file = url_for(
         'static', filename='profile_pictures/' + current_user.profile_picture)
-
     return render_template("profile.html", pageTitle=pageTitle, image_file=image_file, user=db.session.get(User, current_user.id))
 
 

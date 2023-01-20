@@ -1,6 +1,5 @@
 @import "/static/fonts.css";
 :root {
-    --primary: #FEDBD0;
     --text: white;
     --cardButtonTextColor: #c4c3cd;
     --secondary: #FEEAE6;
@@ -28,6 +27,8 @@
 
 body {
     background-color: var(--background);
+    display: flex;
+    justify-content: center;
 }
 
 .header {

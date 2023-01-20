@@ -32,7 +32,10 @@
             <!--  -->
             {% if pageTitle == "Dashboard" -%}
             <div class="reviewer-options">
-                <p class="score"><span class="reviewer-score">{{score}}</span>/{{reviewer.expected_score}}</p>
+                <!-- {% if pageTitle == "Collection" -%}
+                <p class="score"><span class="reviewer-score">{{score}}</span>{{reviewer.expected_score}}</p>
+                {%- endif %} -->
+                <!--  -->
                 {% if reviewer in user_reviewers -%}
                 <!--  -->
                 <div class="bought-reviewer">

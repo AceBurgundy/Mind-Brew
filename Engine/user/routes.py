@@ -5,6 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask import flash, redirect, render_template, request, url_for
 from flask_login import login_user, current_user, logout_user
 from Engine.models import User
+from Engine.test import addReviewer
 from Engine.user.forms import RegisterForm, LoginForm
 from sqlalchemy import insert
 
@@ -41,6 +42,8 @@ def login():
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
+        # addReviewer()
+
         return render_template("login.html", form=form)
 
 
