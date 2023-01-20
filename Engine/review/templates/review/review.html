@@ -6,21 +6,36 @@
 
 <!-- {# scripts #} -->
 {% block component_script -%}
-<script src="{{ url_for('review.static', filename='review.js')}}" defer></script>
+<script src="{{ url_for('review.static', filename='review.js')}}" type="module"></script>
 {%- endblock component_script %}
 
 <!-- {# reviewer section #} -->
 {% block review -%}
 <main id="review">
-    {% for question in questions -%}
-    <div class="review-item">
-        <div class="question" data-question-id="{{ question.id }}">{{ question.question }}</div>
-        <div class="choices-container">
-            {% for choice in question.choices -%}
-            <div class="choice" data-choice-id="{{ choice.id }}">{{ choice.choice }}</div>
-            {%- endfor %}
+    <input type="hidden" value="{{ questions|length }}" id="length-of-quiz">
+    <!--  -->
+    {% for each_subject in subjects -%}
+    <div class="current-subject-container">
+        <div class="subject-title">{{ each_subject.name }}</div>
+        <!-- -->
+        {% for each_question in each_subject.questions -%}
+        <div class="review-item">
+
+            <div class="clear-answer button" data-question-type="{{ each_question.type }}" data-link="{{ url_for('review.remove_answer') }}" data-question-id="{{ each_question.id }}">Clear</div>
+            <div class="question">
+                {{ each_question.question|safe }}
+            </div>
+
+            <div class="choices-container">
+                {% for choice in each_question.choices -%}
+                <div class="choice" data-link="{{ url_for('review.check')}}" data-question-id="{{ each_question.id }}" data-type="{{ each_question.type }}" data-choice-id="{{ choice.id }}">{{ choice.choice }}</div>
+                {%- endfor %}
+            </div>
+
         </div>
+        {%- endfor %}
     </div>
     {%- endfor %}
+    <a id="submit " class="submit-retry button " href="{{ url_for('review.submit', current_reviewer_id=reviewer_id) }} ">SUBMIT</a>
 </main>
 {%- endblock review %}
