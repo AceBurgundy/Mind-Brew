@@ -13,13 +13,28 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+attempt_review = db.Table("attempt_review",
+                          db.Column("id", db.Integer,
+                                    primary_key=True, nullable=False),
+                          db.Column("attempt_id", db.Integer, db.ForeignKey(
+                              'attempts.id', ondelete="CASCADE"), nullable=False),
+                          db.Column("attempt_question_id", db.Integer, db.ForeignKey(
+                              'question.id', ondelete="CASCADE"), nullable=False),
+                          db.Column("attempt_answer_id", db.Integer, db.ForeignKey(
+                              'answer.id', ondelete="CASCADE"), nullable=False),
+                          db.Column("creation_date", db.DateTime(),
+                                    default=datetime.now, nullable=False),
+                          db.Column("updated_date", db.DateTime(),
+                                    default=datetime.now, onupdate=datetime.now, nullable=False)
+                          )
+
 attempts = db.Table("attempts",
                     db.Column("id", db.Integer,
                               primary_key=True, nullable=False),
                     db.Column("reviewer_id", db.Integer, db.ForeignKey(
-                        'reviewer.id'), nullable=False),
+                        'reviewer.id', ondelete="CASCADE"), nullable=False),
                     db.Column("user_id", db.Integer, db.ForeignKey(
-                        'user.id'), nullable=False),
+                        'user.id', ondelete="CASCADE"), nullable=False),
                     db.Column("status", db.String(20), nullable=False),
                     db.Column("score", db.Integer, nullable=False, default=0),
                     db.Column("start_time", db.DateTime(),
@@ -47,7 +62,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     school = db.Column(db.String(300))
     course = db.Column(db.String(60))
-    phone = db.Column(db.String(15))
     profile_picture = db.Column(
         db.String(100), nullable=False, default='default.jpg')
     password = db.Column(db.String(200), nullable=False)
@@ -55,17 +69,30 @@ class User(db.Model, UserMixin):
         db.DateTime(), default=datetime.now, nullable=False)
     last_online = db.Column(
         db.DateTime(), default=datetime.now, onupdate=datetime.now, nullable=False)
+    updated_date = db.Column(
+        db.DateTime(), default=datetime.now, onupdate=datetime.now, nullable=False)
+    phone = db.relationship(
+        'Phone', backref='owner', lazy=True, uselist=False, passive_deletes=True)
 
     reviewers = db.relationship(
         'Reviewer', secondary=user_reviewers, backref='owners', lazy=True)
 
     attempts = db.relationship(
         'Reviewer', secondary=attempts, backref='attempts')
-    # # this is not a column so we wont see a projects column in the User database. Instead,
-    # # it runs a additional querry in the backrground to match the projects that the user has created
 
     def __repr__(self):
         return f"User('{self.username}','{self.reviewers}') "
+
+
+class Phone(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    country_code = db.Column(db.String(10))
+    phone_number = db.Column(db.String(10))
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete="CASCADE"), nullable=False)
+
+    def __repr__(self):
+        return f"Phone('{self.country_code}','{self.phone_number}') "
 
 
 class Message(db.Model, UserMixin):
@@ -88,18 +115,35 @@ class Reviewer(db.Model, UserMixin):
     name = db.Column(db.String(60), nullable=False)
     creation_date = db.Column(
         db.DateTime(), default=datetime.now, nullable=False)
+    updated_date = db.Column(
+        db.DateTime(), default=datetime.now, onupdate=datetime.now)
     author = db.Column(db.String(80), nullable=False)
     image = db.Column(
         db.String(100), nullable=False, default='reviewer.jpg')
-    expected_score = db.Column(db.Integer, nullable=False, default=0)
     details = db.Column(
         db.String(200), default="A new reviewer", nullable=False)
     availability = db.Column(db.Boolean, nullable=False, default=True)
-    questions = db.relationship(
-        'Question', backref='reviewer', lazy=True, passive_deletes=True)
+    subjects = db.relationship(
+        'Subject', backref='reviewer', passive_deletes=True)
 
     def __repr__(self):
         return f"Reviewer('{self.id}', '{self.name}','{self.author}') "
+
+
+class Subject(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    creation_date = db.Column(
+        db.DateTime(), default=datetime.now)
+    updated_date = db.Column(
+        db.DateTime(), default=datetime.now, onupdate=datetime.now)
+    name = db.Column(db.String(200), nullable=False)
+    reviewer_id = db.Column(db.Integer, db.ForeignKey(
+        'reviewer.id', ondelete="CASCADE"), nullable=False)
+    questions = db.relationship(
+        'Question', backref='reviewer', passive_deletes=True)
+
+    def __repr__(self):
+        return f"Subject('{self.id}', '{self.name}','{self.reviewer_id}') "
 
 
 class Question(db.Model, UserMixin):
@@ -108,23 +152,17 @@ class Question(db.Model, UserMixin):
         db.DateTime(), default=datetime.now)
     updated_date = db.Column(
         db.DateTime(), default=datetime.now, onupdate=datetime.now)
-
     question = db.Column(db.String(1000), nullable=False)
-
     type = db.Column(db.String(20), nullable=False)
-    # multiple choice, identification, enumeration.
-
+    subject_id = db.Column(db.Integer, db.ForeignKey(
+        'subject.id', ondelete="CASCADE"))
     choices = db.relationship(
-        'Choice', backref='question', lazy=True, passive_deletes=True)
-
-    answer = db.relationship(
-        'Answer', backref='question', lazy=True, uselist=False, passive_deletes=True)
-
-    reviewer_id = db.Column(db.Integer, db.ForeignKey(
-        'reviewer.id', ondelete="CASCADE"))
+        'Choice', lazy="subquery", backref='question', passive_deletes=True)
+    answer = db.relationship('Answer', backref='question',
+                             uselist=False, passive_deletes=True)
 
     def __repr__(self):
-        return f"Question('{self.question}', '{self.reviewer_id}', '{self.type}','{self.choices}','{self.answer}')"
+        return f"Question('{self.question}', '{self.type}','{self.choices}','{self.answer}')"
 
 
 class Choice(db.Model, UserMixin):
